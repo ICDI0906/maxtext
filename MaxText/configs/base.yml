@@ -213,7 +213,7 @@ num_slices: -1
 # Tokenizer and Dataset
 # Replace with your path given as argument in download_dataset.sh, e.g. "gs://my-maxtext-dataset/"
 vocab_size: 32_000 # powers of 2 for sharding
-tokenizer_path: "assets/tokenizer.llama2"
+tokenizer_path: "assets/tokenizer.qwen2"
 per_device_batch_size: 12.0
 expansion_factor_real_data: -1 # if -1 then all hosts will load real data, else total_hosts//expansion_factor_real_data will pull data from GCS.
 eval_per_device_batch_size: 0
@@ -227,9 +227,9 @@ dataset_name: 'c4/en:3.0.1'
 eval_dataset_name: 'c4/en:3.0.1'
 eval_split: 'validation'
 # for HuggingFace input pipeline (dataset_type=hf)
-hf_path: 'm-a-p/Matrix'
+hf_path: 'json'
 hf_data_dir: ''
-hf_train_files: 'A_cc_en_sample.jsonl'
+hf_train_files: 'gs://us-east5-bucket/m-a-p/Matrix/*.json'
 hf_eval_split: ''
 hf_eval_files: ''
 hf_access_token: ''
