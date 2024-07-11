@@ -53,6 +53,7 @@ class Embed(nn.Module):
   embedding_init: Initializer = default_embed_init
 
   def setup(self):
+    ## mesh ('tensor', 'autoregressive', 'fsdp', 'fsdp_transpose', 'sequence')
     self.embedding = self.param(
         "embedding",
         with_logical_partitioning(self.embedding_init, ("vocab", "embed")),

@@ -68,9 +68,10 @@ class MistralDecoderLayer(nn.Module):
   ):
     cfg = self.config
     mesh = self.mesh
-
+    ## mesh ('data', 'fsdp', 'fsdp_transpose', 'sequence', 'tensor')
     inputs = nn.with_logical_constraint(inputs, ("activation_batch", "activation_length", "activation_embed"))
 
+    ## mesh ('tensor')
     lnx_rms = models.RMSNorm(
         dtype=cfg.dtype,
         weight_dtype=cfg.weight_dtype,
@@ -79,7 +80,7 @@ class MistralDecoderLayer(nn.Module):
         epsilon=cfg.normalization_layer_epsilon,
     )
     lnx = lnx_rms(inputs)
-
+    ## mesh('data', 'fsdp', 'fsdp_transpose', 'sequence', 'tensor')
     lnx = nn.with_logical_constraint(lnx, ("activation_batch", "activation_length", "activation_embed"))
 
     # Self-attention block
